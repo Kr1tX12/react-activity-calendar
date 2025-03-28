@@ -168,6 +168,16 @@ export type Props = {
    * Index of day to be used as start of week. 0 represents Sunday.
    */
   weekStart?: DayIndex
+
+  /**
+   * Class names for the component container. Can be used to add custom styles.
+   */
+  className?: string
+
+  /**
+   * Class names for the block. Can be used to add custom styles.
+   */
+  blocksClassName?: string
 }
 
 export const ActivityCalendar = forwardRef<HTMLElement, Props>(
@@ -193,6 +203,8 @@ export const ActivityCalendar = forwardRef<HTMLElement, Props>(
       theme: themeProp = undefined,
       totalCount: totalCountProp = undefined,
       weekStart = 0, // Sunday
+      className,
+      blocksClassName,
     }: Props, // Required for react-docgen
     ref,
   ) => {
@@ -281,6 +293,7 @@ export const ActivityCalendar = forwardRef<HTMLElement, Props>(
                 data-date={activity.date}
                 data-level={activity.level}
                 style={{ ...styles.rect(colorScheme), ...loadingAnimation }}
+                className={blocksClassName}
               />
             )
 
@@ -417,7 +430,7 @@ export const ActivityCalendar = forwardRef<HTMLElement, Props>(
         className={NAMESPACE}
         style={{ ...styleProp, ...styles.container(fontSize) }}
       >
-        <div className={getClassName('scroll-container')} style={styles.scrollContainer(fontSize)}>
+        <div className={`${getClassName('scroll-container')} ${className}`} style={styles.scrollContainer(fontSize)}>
           <svg
             width={width}
             height={height}
